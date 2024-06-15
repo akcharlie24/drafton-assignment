@@ -16,7 +16,7 @@ export default function Home() {
       for (let i = 0; i < items.length; i++) {
         const item = items[i];
         if (item.name === name) {
-          return items.splice(i, 1)[0]; // Return the spliced item
+          return items.splice(i, 1)[0];
         }
         if (item.children) {
           const removedItem = findAndRemoveItem(item.children, name);
@@ -36,7 +36,7 @@ export default function Home() {
       for (const folder of items) {
         if (folder.name === targetFolderName && folder.type === "folder") {
           if (!folder.children) {
-            folder.children = []; // Initialize children if not present
+            folder.children = [];
           }
           folder.children.push(item);
           return;
