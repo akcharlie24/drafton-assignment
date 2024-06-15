@@ -9,12 +9,14 @@ export default function Home() {
   const [navItems, setNavItems] = useState(initialNavItems);
 
   const moveItem = (item: navItem, targetFolderName: string) => {
-    const findAndRemoveItem: any = (items: navItem[], name: string) => {
+    const findAndRemoveItem = (
+      items: navItem[],
+      name: string,
+    ): navItem | null => {
       for (let i = 0; i < items.length; i++) {
         const item = items[i];
         if (item.name === name) {
-          items.splice(i, 1);
-          return item;
+          return items.splice(i, 1)[0]; // Return the spliced item
         }
         if (item.children) {
           const removedItem = findAndRemoveItem(item.children, name);
@@ -23,6 +25,7 @@ export default function Home() {
           }
         }
       }
+      return null;
     };
 
     const addItem = (
@@ -32,9 +35,10 @@ export default function Home() {
     ) => {
       for (const folder of items) {
         if (folder.name === targetFolderName && folder.type === "folder") {
-          folder.children = folder.children
-            ? [...folder.children, item]
-            : [item];
+          if (!folder.children) {
+            folder.children = []; // Initialize children if not present
+          }
+          folder.children.push(item);
           return;
         }
         if (folder.children) {

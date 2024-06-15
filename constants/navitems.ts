@@ -18,9 +18,9 @@ export const navItems: navItem[] = [
         type: "folder",
         children: [
           {
-            name: "styles.css",
+            name: "styles",
             type: "folder",
-            children: [{ name: "layout.tsx", type: "file" }],
+            children: [{ name: "app.tsx", type: "file" }],
           },
           { name: "layout.tsx", type: "file" },
         ],
